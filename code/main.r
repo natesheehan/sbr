@@ -35,7 +35,10 @@ if (file.exists("east_devon.Rds")) {
 }
 
 #Load gpx data from kamoot
-p = read_sf("Bike_Ride_14_08_2021_16_52.gpx", layer = "tracks")
+p = read_sf("Bike_Ride_14_08_2021_16_52.gpx", layer = "tracks") 
+  
+p = st_transform(p$geometry,crs = crs(east_devon))
+
 pp = read_sf("Bike_Ride_14_08_2021_16_52.gpx", layer = "track_points") # track points
 
 
@@ -150,7 +153,7 @@ basemap %>%
     generate_line_overlay(
       east_devon_lines,
       extent = extent_zoomed,
-      linewidth = 6,
+      linewidth = 12,
       color = "#2d8a91",
       heightmap = east_devon_zoom_mat
     )
